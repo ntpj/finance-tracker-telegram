@@ -1,4 +1,4 @@
-name: Run Telegram Script
+name: Short-Mid Term Trend
 
 on:
   workflow_dispatch: {}
