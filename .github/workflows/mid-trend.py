@@ -1,0 +1,30 @@
+name: Run Telegram Script
+
+on:
+  workflow_dispatch: {}
+  schedule:
+    - cron: "0 12 * * 1-5" # Mon-Fri 12:00 UTC (19:00 Bangkok)
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run script
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          TELEGRAM_MAX: "3900"
+          TICKERS_JSON: ${{ vars.TICKERS_JSON }}
+        run: |
+          python short-mid-calc.py
