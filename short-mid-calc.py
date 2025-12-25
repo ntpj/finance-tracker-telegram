@@ -2,6 +2,7 @@ import math
 import pandas as pd
 import yfinance as yf
 import requests
+import os, json
 
 # ====== TELEGRAM CONFIG ======
 BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
